@@ -9,7 +9,7 @@ QMLP: An Error-Tolerant Nonlinear Quantum MLP Architecture using Parameterized T
 * Pytorch
 * Qiskit
 * Pennylane
-* json
+
 
 
 
