@@ -40,14 +40,14 @@ test_loader = DataLoader(test_dataset, shuffle=False, batch_size=bsz)
 ###########################################################################################################################################################################
 noise_model = NoiseModel(basis_gates=['id', 'rz', 'sx', 'cx', 'x'])
 
-# # bit filp
-# p = 0.01
-# bitflip = noise.pauli_error([('X', p), ('I', 1-p)])
-# bitflip2 = noise.pauli_error([('X', p), ('I', 1-p)])
-# noisemy = bitflip.tensor(bitflip2)
-# print(noisemy)
-# noise_model.add_all_qubit_quantum_error(bitflip, ['id', 'rz', 'sx', 'x'])
-# noise_model.add_all_qubit_quantum_error(noisemy, ['cx'])
+# # # bit filp
+# # p = 0.01
+# # bitflip = noise.pauli_error([('X', p), ('I', 1-p)])
+# # bitflip2 = noise.pauli_error([('X', p), ('I', 1-p)])
+# # noisemy = bitflip.tensor(bitflip2)
+# # print(noisemy)
+# # noise_model.add_all_qubit_quantum_error(bitflip, ['id', 'rz', 'sx', 'x'])
+# # noise_model.add_all_qubit_quantum_error(noisemy, ['cx'])
 
 # phase flip
 p = 0.01
@@ -68,12 +68,8 @@ dev = qml.device("default.qubit", wires=n_qubits)
 @qml.qnode(dev)
 def qnode(inputs, w000, w001, w002, w003, w004, w005, w006, w007, w008, w009, w010, w011, w012, w013, w014, w015,
           w100, w101, w102, w103, w104, w105, w106, w107, w108, w109, w110, w111, w112, w113, w114, w115,
-          w200, w201, w202, w203, w204, w205, w206, w207, w208, w209, w210, w211, w212, w213, w214, w215,
-          w300, w301, w302, w303, w304, w305, w306, w307, w308, w309, w310, w311, w312, w313, w314, w315,
           x000, x001, x002, x003, x004, x005, x006, x007, x008, x009, x010, x011, x012, x013, x014, x015,
-          x100, x101, x102, x103, x104, x105, x106, x107, x108, x109, x110, x111, x112, x113, x114, x115,
-          x200, x201, x202, x203, x204, x205, x206, x207, x208, x209, x210, x211, x212, x213, x214, x215,
-          x300, x301, x302, x303, x304, x305, x306, x307, x308, x309, x310, x311, x312, x313, x314, x315):
+          x100, x101, x102, x103, x104, x105, x106, x107, x108, x109, x110, x111, x112, x113, x114, x115,):
     for rx in range(16):
       qml.RX(inputs[rx], wires=rx)
     qml.Rot(*w000, wires=0)
@@ -146,78 +142,6 @@ def qnode(inputs, w000, w001, w002, w003, w004, w005, w006, w007, w008, w009, w0
     qml.CRX(x114, wires=[14,15])
     qml.CRX(x115, wires=[15,0])
 
-    for rx in range(16):
-      qml.RX(inputs[rx], wires=rx)
-    qml.Rot(*w200, wires=0)
-    qml.Rot(*w201, wires=1)
-    qml.Rot(*w202, wires=2)
-    qml.Rot(*w203, wires=3)
-    qml.Rot(*w204, wires=4)
-    qml.Rot(*w205, wires=5)
-    qml.Rot(*w206, wires=6)
-    qml.Rot(*w207, wires=7)
-    qml.Rot(*w208, wires=8)
-    qml.Rot(*w209, wires=9)
-    qml.Rot(*w210, wires=10)
-    qml.Rot(*w211, wires=11)
-    qml.Rot(*w212, wires=12)
-    qml.Rot(*w213, wires=13)
-    qml.Rot(*w214, wires=14)
-    qml.Rot(*w215, wires=15)
-    
-    qml.CRX(x200, wires=[0,1])
-    qml.CRX(x201, wires=[1,2])
-    qml.CRX(x202, wires=[2,3])
-    qml.CRX(x203, wires=[3,4])
-    qml.CRX(x204, wires=[4,5])
-    qml.CRX(x205, wires=[5,6])
-    qml.CRX(x206, wires=[6,7])
-    qml.CRX(x207, wires=[7,8])
-    qml.CRX(x208, wires=[8,9])
-    qml.CRX(x209, wires=[9,10])
-    qml.CRX(x210, wires=[10,11])
-    qml.CRX(x211, wires=[11,12])
-    qml.CRX(x212, wires=[12,13])
-    qml.CRX(x213, wires=[13,14])
-    qml.CRX(x214, wires=[14,15])
-    qml.CRX(x215, wires=[15,0])
-
-    for rx in range(16):
-      qml.RX(inputs[rx], wires=rx)
-    qml.Rot(*w300, wires=0)
-    qml.Rot(*w301, wires=1)
-    qml.Rot(*w302, wires=2)
-    qml.Rot(*w303, wires=3)
-    qml.Rot(*w304, wires=4)
-    qml.Rot(*w305, wires=5)
-    qml.Rot(*w306, wires=6)
-    qml.Rot(*w307, wires=7)
-    qml.Rot(*w308, wires=8)
-    qml.Rot(*w309, wires=9)
-    qml.Rot(*w310, wires=10)
-    qml.Rot(*w311, wires=11)
-    qml.Rot(*w312, wires=12)
-    qml.Rot(*w313, wires=13)
-    qml.Rot(*w314, wires=14)
-    qml.Rot(*w315, wires=15)
-
-    qml.CRX(x300, wires=[0,1])
-    qml.CRX(x301, wires=[1,2])
-    qml.CRX(x302, wires=[2,3])
-    qml.CRX(x303, wires=[3,4])
-    qml.CRX(x304, wires=[4,5])
-    qml.CRX(x305, wires=[5,6])
-    qml.CRX(x306, wires=[6,7])
-    qml.CRX(x307, wires=[7,8])
-    qml.CRX(x308, wires=[8,9])
-    qml.CRX(x309, wires=[9,10])
-    qml.CRX(x310, wires=[10,11])
-    qml.CRX(x311, wires=[11,12])
-    qml.CRX(x312, wires=[12,13])
-    qml.CRX(x313, wires=[13,14])
-    qml.CRX(x314, wires=[14,15])
-    qml.CRX(x315, wires=[15,0])
-
 
     return (qml.expval(qml.PauliZ(0)), qml.expval(qml.PauliZ(1)), qml.expval(qml.PauliZ(2)), qml.expval(qml.PauliZ(3)), qml.expval(qml.PauliZ(4)),
     qml.expval(qml.PauliZ(5)), qml.expval(qml.PauliZ(6)), qml.expval(qml.PauliZ(7)), qml.expval(qml.PauliZ(8)), qml.expval(qml.PauliZ(9)), 
@@ -231,16 +155,9 @@ weight_shapes = {"w000": 3, "w001": 3, "w002": 3, "w003": 3, "w004": 3, "w005": 
           "w100": 3, "w101": 3, "w102": 3, "w103": 3, "w104": 3, "w105": 3, "w106": 3, "w107": 3, 
           "w108": 3, "w109": 3, "w110": 3, "w111": 3, "w112": 3, "w113": 3, "w114": 3, "w115": 3,
           "x100": 1, "x101": 1, "x102": 1, "x103": 1, "x104": 1, "x105": 1, "x106": 1, "x107": 1, 
-          "x108": 1, "x109": 1, "x110": 1, "x111": 1, "x112": 1, "x113": 1, "x114": 1, "x115": 1,
-          "w200": 3, "w201": 3, "w202": 3, "w203": 3, "w204": 3, "w205": 3, "w206": 3, "w207": 3, 
-          "w208": 3, "w209": 3, "w210": 3, "w211": 3, "w212": 3, "w213": 3, "w214": 3, "w215": 3,
-          "x200": 1, "x201": 1, "x202": 1, "x203": 1, "x204": 1, "x205": 1, "x206": 1, "x207": 1, 
-          "x208": 1, "x209": 1, "x210": 1, "x211": 1, "x212": 1, "x213": 1, "x214": 1, "x215": 1,
-          "w300": 3, "w301": 3, "w302": 3, "w303": 3, "w304": 3, "w305": 3, "w306": 3, "w307": 3, 
-          "w308": 3, "w309": 3, "w310": 3, "w311": 3, "w312": 3, "w313": 3, "w314": 3, "w315": 3,
-          "x300": 1, "x301": 1, "x302": 1, "x303": 1, "x304": 1, "x305": 1, "x306": 1, "x307": 1, 
-          "x308": 1, "x309": 1, "x310": 1, "x311": 1, "x312": 1, "x313": 1, "x314": 1, "x315": 1}
+          "x108": 1, "x109": 1, "x110": 1, "x111": 1, "x112": 1, "x113": 1, "x114": 1, "x115": 1}
 
+# qlayer = qml.qnn.TorchLayer(qnode, weight_shapes)
 
 
 #################################################################################################################################################################################
@@ -260,7 +177,6 @@ class MNIST(nn.Module):
         x = self.qlayer(x)
         out = self.fc1(x)
         out = F.log_softmax(out, dim=1)
-        print(out)
         return out
 
 
@@ -303,9 +219,6 @@ def test(model, DEVICE, test_loader):
             _, predicted = torch.max(outputs.data, dim=1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
-            print("现在正确的个数是：", correct, "总共是多少个：", total, "正确率为：", correct/total)
-            if total > 1000:
-                break
     print('accuracy on test set: %d %% ' % (100 * correct / total))
     acc = 100 * correct / total
     return acc
@@ -314,11 +227,9 @@ def test(model, DEVICE, test_loader):
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = MNIST().to(device)
-model.load_state_dict(torch.load("./model/4crx.pth"))
 optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=w_decay)
 
 
-for epoch in range(1):
-    # train(model, device, train_loader, optimizer, epoch)
-    # torch.save(model.state_dict(), './model/4crx.pth')
+for epoch in range(epochs):
+    train(model, device, train_loader, optimizer, epoch)
     test(model, device, test_loader)
