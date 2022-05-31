@@ -19,9 +19,6 @@ import os
 import qiskit.providers.aer.noise as noise
 from qiskit.providers.aer.noise import NoiseModel
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '13'
-
-
 
 bsz = 32
 epochs = 30
@@ -57,12 +54,10 @@ noisemy = phaseflip.tensor(phaseflip2)
 noise_model.add_all_qubit_quantum_error(phaseflip, ['id', 'rz', 'sx', 'x'])
 noise_model.add_all_qubit_quantum_error(noisemy, ['cx'])
 
-print("noise model", noise_model)
-
 ###########################################################################################################################################################################
 n_qubits = 16
-dev = qml.device("default.qubit", wires=n_qubits)
-# dev = qml.device('qiskit.aer', wires=n_qubits, noise_model=noise_model)
+dev = qml.device("default.qubit", wires=n_qubits)      # w/o noise
+# dev = qml.device('qiskit.aer', wires=n_qubits, noise_model=noise_model)      # w noise
 
 
 @qml.qnode(dev)
@@ -157,9 +152,6 @@ weight_shapes = {"w000": 3, "w001": 3, "w002": 3, "w003": 3, "w004": 3, "w005": 
           "x100": 1, "x101": 1, "x102": 1, "x103": 1, "x104": 1, "x105": 1, "x106": 1, "x107": 1, 
           "x108": 1, "x109": 1, "x110": 1, "x111": 1, "x112": 1, "x113": 1, "x114": 1, "x115": 1}
 
-# qlayer = qml.qnn.TorchLayer(qnode, weight_shapes)
-
-
 #################################################################################################################################################################################
 
 class MNIST(nn.Module):
@@ -178,8 +170,6 @@ class MNIST(nn.Module):
         out = self.fc1(x)
         out = F.log_softmax(out, dim=1)
         return out
-
-
 
 ###########################################################################################################################################################################
 def train(model, DEVICE, train_loader, optimizer, epoch):
@@ -204,7 +194,6 @@ def train(model, DEVICE, train_loader, optimizer, epoch):
         if (batch_idx + 1) % 10 == 0:
             print('epoch: %d, batch_idx: %d, acc: %5f %%, loss: %.3f' % (epoch, batch_idx + 1, 100 * correct / total, running_loss / 10))
             running_loss = 0.0
-
 
 ##########################################################################################################################################################################
 def test(model, DEVICE, test_loader):
